@@ -10,3 +10,5 @@ tokenizer = AutoTokenizer.from_pretrained("edbeeching/decision-transformer-gym-h
 # if __name__ == "__main__":
 #     cdt = CustomDecisionTransformer("edbeeching/decision-transformer-gym")
 #     cdt.load_model()
+#I dont really know waht this file does it kinda is just here temporarily for figuring how to download and fine tune
+#transformers from hugging face.
