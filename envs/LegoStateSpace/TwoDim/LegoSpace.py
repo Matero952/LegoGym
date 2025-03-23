@@ -8,7 +8,6 @@ from envs.LegoStateSpace.TwoDim.LegoObjects import (
 
 
 class LegoSpace(LegoObjects):
-    # TODO: Define Constraints
 
     # Define Event Handling (e.g. blocks are placed in illegal positions and there needs to be a notification)
     # WILL BE IMPLEMENTED SOON
@@ -38,6 +37,7 @@ class LegoSpace(LegoObjects):
 class Constraints(object):
     # This is the class for the constraints of the world. Theres a bit of physics stuff.
     K_STABILITY = 1
+    # Stability constant to multiply by in COM calc.
 
     # Tweakable value
     def __init__(self, env_shape, lego_space: LegoSpace):
@@ -57,6 +57,7 @@ class Constraints(object):
             return self.lego_space.config[x, y - 1] != 0
             # Config will be a numpy array
 
+    # Calculations
     def calculate_stability(self):
         stability_state = np.zeros(self.env_shape, dtype=self.lego_space.dtype)
         for r_idx, row in enumerate(stability_state):
@@ -67,6 +68,25 @@ class Constraints(object):
                 # Calculation that takes height from base in account as stuff closer to the bottom have more significance.
         return stability_state
 
+    def calculate_com(self, bricks, stab_state: np.ndarray):
+        # Method to calculate center of mass of block structure to determine if structure will collapse/topple over.
+        mass_sum = 0
+        x_sum = 0
+        y_sum = 0
+        for brick in bricks:
+            x = brick.x
+            y = brick.y
+            weight = stab_state[x][y]
+            mass_sum += (weight * self.lego_space.mass) * Constraints.K_STABILITY
+            x_sum += (x * weight * self.lego_space.mass) * Constraints.K_STABILITY
+            y_sum += (y * weight * self.lego_space.mass) * Constraints.K_STABILITY
+
+        com_x = x_sum / mass_sum
+        com_y = y_sum / mass_sum
+        return round(com_x), round(com_y)
+        # Rounds because we are working with array indexes.
+
+    # Initializations
     def init_blocks(self, st_state: np.ndarray):
         bricks = []
         for r_idx, row in enumerate(st_state):
@@ -87,7 +107,3 @@ class Constraints(object):
     def init_ground(self):
         ground_level = LegoEnvironmentGround(self.env_shape)
         return ground_level
-
-    def calculate_com(self, st_state: np.ndarray):
-        total_mass = sum(self.lego_space.mass * np.nditer(st_state))
-        #TODO Finish
