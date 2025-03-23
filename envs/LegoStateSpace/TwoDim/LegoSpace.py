@@ -39,11 +39,11 @@ class Constraints(object):
     K_STABILITY = 1
     # Stability constant to multiply by in COM calc.
 
-    # Tweakable value
     def __init__(self, env_shape, lego_space: LegoSpace):
         self.env_shape = env_shape
         self.lego_space = lego_space
 
+    # Checks
     def in_bounds(self, x, y):
         return x <= self.env_shape[0] and y <= self.env_shape[1]
 
@@ -56,6 +56,21 @@ class Constraints(object):
         else:
             return self.lego_space.config[x, y - 1] != 0
             # Config will be a numpy array
+
+    @staticmethod
+    def will_topple(base_blocks: list[Brick, ...], com):
+        x_bounds = []
+        y_bounds = []
+        com_x, com_y = com
+        for brick in base_blocks:
+            x_bounds.append(brick.x)
+            y_bounds.append(brick.y)
+        lower_x = min(x_bounds)
+        lower_y = min(y_bounds)
+        upper_x = max(x_bounds)
+        upper_y = max(y_bounds)
+        return lower_x <= com_x <= upper_x and lower_y <= com_y <= upper_y
+        # Returns true if the center of mass is within the bounds.
 
     # Calculations
     def calculate_stability(self):
