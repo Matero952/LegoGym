@@ -8,7 +8,8 @@ class Brick(Object):
     connectable = False
 
     def __init__(self, x=None, y=None):
-        pass
+        self._y = None
+        self._x = None
 
     @property
     def x(self):
@@ -29,9 +30,9 @@ class Brick(Object):
 
 class LegoEnvironmentGround(Object):
     def __init__(self, env_shape: tuple[int, int]):
-        # Define ground level
-        self.x = 0
-        self.y = [i for i in range(env_shape[1])]
+        # Define ground level. Numpy is rows by columns (height by width)
+        self.x = [i for i in range(env_shape[1])]
+        self.y = 0
 
 
 class LegoObjects(Brick, LegoEnvironmentGround):
