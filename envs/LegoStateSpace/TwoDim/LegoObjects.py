@@ -7,35 +7,47 @@ class Brick(Object):
     mass = 1
     connectable = False
 
-    def __init__(self, x=None, y=None):
-        self._y = None
-        self._x = None
+    def __init__(self, row=None, col=None):
+        self._row = None
+        self._col = None
+        self._moveable = False
+        self._stashed = False
 
     @property
-    def x(self):
-        return self._x
+    def row(self):
+        return self._row
 
     @property
-    def y(self):
-        return self._y
+    def col(self):
+        return self._col
 
-    @x.setter
-    def x(self, val):
-        self._x = val
+    @property
+    def moveable(self):
+        return self._moveable
 
-    @y.setter
-    def y(self, val):
-        self._y = val
+    @property
+    def stashed(self):
+        return self._stashed
+
+    @row.setter
+    def row(self, val):
+        self._row = val
+
+    @col.setter
+    def col(self, val):
+        self._col = val
+
+    @moveable.setter
+    def moveable(self, val):
+        self._moveable = val
+
+    @stashed.setter
+    def stashed(self, val):
+        self._stashed = val
 
 
 class LegoEnvironmentGround(Object):
     def __init__(self, env_shape: tuple[int, int]):
         # Define ground level. Numpy is rows by columns (height by width)
-        self.x = [i for i in range(env_shape[1])]
-        self.y = 0
-
-
-class LegoObjects(Brick, LegoEnvironmentGround):
-    def __init__(self, env_shape: tuple[int, int]):
-        Brick.__init__(self)
-        LegoEnvironmentGround.__init__(self, env_shape)
+        self.row = 0
+        self.col = [i for i in range(env_shape[1])]
