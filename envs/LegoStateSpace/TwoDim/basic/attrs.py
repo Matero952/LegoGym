@@ -44,7 +44,7 @@ class ActionPreconditions:
         self.action = action
 
     def action_will_topple_structure(self):
-        test_state = (self.constraint_set.world).deepcopy()
+        test_state = self.constraint_set.world.deepcopy()
         base_bricks = []
         pick_act, place_act = self.action
         assert isinstance(pick_act, list) and isinstance(place_act, list)

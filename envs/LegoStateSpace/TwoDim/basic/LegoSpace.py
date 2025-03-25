@@ -1,6 +1,6 @@
 import numpy as np
 
-from envs.LegoStateSpace.TwoDim.LegoObjects import (
+from envs.LegoStateSpace.TwoDim.basic.LegoObjects import (
     Brick,
     LegoEnvironmentGround,
 )
@@ -13,27 +13,30 @@ class Constraints(object):
 
     def __init__(self, np_world):
         self.world = np_world
-        self.env_shape = (np.max(np_world, axis=0), np.max(np_world, axis=1))
+        self.env_shape = np_world.shape
+        print(f"ENV shape: {self.env_shape}")
 
     # Checks
     def in_bounds(self, row_idx, col_idx):
         return row_idx < self.env_shape[0] and col_idx < self.env_shape[1]
 
     def is_occupied(self, row_idx, col_idx):
-        return self.world.np_world[row_idx, col_idx] != 0
+        return self.world[row_idx, col_idx] != 0
 
     def is_supported(self, row_idx, col_idx):
         if row_idx == 0:
             return True
+        elif self.world[row_idx, col_idx] == 0:
+            return True
         else:
-            return self.world.np_world[row_idx - 1, col_idx] != 0
+            return self.world[row_idx - 1, col_idx] != 0
             # Config will be a numpy array
 
     def is_removeable(self, row_idx, col_idx):
         if row_idx == self.env_shape[1]:
             return True
         else:
-            return True if self.world.np_world[row_idx, col_idx + 1] == 0 else False
+            return True if self.world[row_idx, col_idx + 1] == 0 else False
 
     @staticmethod
     def is_off_table(row_idx, col_idx):
@@ -58,6 +61,7 @@ class Constraints(object):
 
     # Calculations
     def calculate_stability(self):
+
         stability_state = np.zeros(self.env_shape, dtype=np.float16)
         for r_idx, row in enumerate(stability_state):
             for c_idx, col in enumerate(row):
@@ -90,9 +94,9 @@ class Constraints(object):
     # Initializations
     def init_blocks(self):
         bricks = []
-        for r_idx, row in enumerate(self.world.np_world):
+        for r_idx, row in enumerate(self.world):
             for c_idx, col in enumerate(row):
-                if self.world.np_world[r_idx, c_idx] != 0:
+                if self.world[r_idx, c_idx] != 0:
                     assert self.in_bounds(r_idx, c_idx), "Placement not in bounds"
                     assert self.is_supported(r_idx, c_idx), "Placement not in support"
                     new_brick = Brick()
@@ -130,24 +134,3 @@ class LegoSpace(Constraints):
     @config.setter
     def config(self, config):
         self._config = config
-
-
-class Event:
-    def __init__(self, message):
-        self.message = message
-        pass
-
-
-class IllegalMove(Event):
-    pass
-
-
-class Topple(Event):
-    pass
-
-
-# Class Heirarchy
-# The highest is the State
-# Then is the Space, which is ONLY built on constraints and preconditions
-# Then is the constraints
-# Then is the preconditions
