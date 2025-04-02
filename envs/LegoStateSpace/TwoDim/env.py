@@ -1,14 +1,18 @@
 # this file is for defining a lego space. It uses a numpy array to reprsent a space.
 # space constraints is another class that define some world, not block specific constraints.
 # structure toppling
+# TODO Add pathing please <3
+# TODO Add functionality where the agent doesnt exactly choose the actual min and max of a block so you just override it to
+# whichever block that the coordinate position is pointing to.
 import numpy as np
 
 
-class Space:
+class PlanarLegoEnvironment(object):
     def __init__(self):
         self._space = None
         self._space_constraints = None
         self._blocks = None
+        self._time_step = None
 
     @property
     def space(self):
@@ -36,9 +40,33 @@ class Space:
     def blocks(self, value):
         self._blocks = value
 
+    @property
+    def time_step(self):
+        return self._time_step
+
+    @time_step.setter
+    def time_step(self, value):
+        self._time_step = value
+
     def display_human_readable_space(self):
         assert self._space is not None
         assert self._space_constraints is not None
         assert self._blocks is not None
         return np.flipud(self._space)
         # space is usually upside down to humans so this makes it actually like human-readable
+
+    def step(self, action):
+        # Action is like this its probably a good idea to comment this bc otherwise i will lowk forget.
+        # [block unique identifier(integer), block to move (row_min, col_min), new placement (row_min_new, col_min_new)]
+
+        pass
+
+    def reset(self):
+        self.time_step = 0
+        pass
+
+    def render(self):
+        pass
+
+    def close(self):
+        pass

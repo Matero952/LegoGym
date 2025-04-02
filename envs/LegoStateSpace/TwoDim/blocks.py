@@ -44,8 +44,8 @@ class OneByOne:
 
 class TwoByTwo:
     mass = 4
-    width = 2
-    height = 2
+    width = 1
+    height = 1
 
     def __init__(self, block_constraints: Optional[BlockConstraints] = None):
         self._row_min = None
@@ -79,8 +79,8 @@ class TwoByTwo:
 
 class OneByTwo:
     mass = 2
-    width = 1
-    height = 2
+    width = 0
+    height = 1
 
     def __init__(self, block_constraints: Optional[BlockConstraints] = None):
         self._row_min = None
@@ -114,8 +114,8 @@ class OneByTwo:
 
 class TwoByOne:
     mass = 2
-    width = 2
-    height = 1
+    width = 1
+    height = 0
 
     def __init__(self, block_constraints: Optional[BlockConstraints] = None):
         self._row_min = None
@@ -149,8 +149,8 @@ class TwoByOne:
 
 class TwoByThree:
     mass = 6
-    width = 2
-    height = 3
+    width = 1
+    height = 2
 
     def __init__(self, block_constraints: Optional[BlockConstraints] = None):
         self._row_min = None

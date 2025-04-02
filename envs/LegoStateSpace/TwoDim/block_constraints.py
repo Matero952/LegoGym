@@ -80,6 +80,21 @@ class BlockConstraints:
         assert self._block is not None
         assert self.world is not None
 
+    def is_in_bounds(self):
+        # this function checks if an object is fully in bounds
+        row_min_idx, col_min_idx, row_max_idx, col_max_idx = self.get_block()
+        world_row_max, world_col_max = self.world.shape
+        world_rows = range(0, world_row_max - 1 + 1)
+        world_cols = range(0, world_col_max - 1 + 1)
+        # these are naturally the shape, which means i need to subtract one, but I also need to add one because
+        # range is exclusive on last.
+        return (
+            True
+            if (row_min_idx in world_rows and row_max_idx in world_rows)
+            and (col_min_idx in world_cols and col_max_idx in world_cols)
+            else False
+        )
+
 
 if __name__ == "__main__":
     from envs.LegoStateSpace.TwoDim.blocks import OneByOne
