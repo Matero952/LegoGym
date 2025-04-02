@@ -1,6 +1,5 @@
 # this file is for defining a lego space. It uses a numpy array to reprsent a space.
 # space constraints is another class that define some world, not block specific constraints.
-
 # structure toppling
 import numpy as np
 
@@ -42,4 +41,4 @@ class Space:
         assert self._space_constraints is not None
         assert self._blocks is not None
         return np.flipud(self._space)
-        #space is usually upside down to humans so this makes it actually like human-readable
+        # space is usually upside down to humans so this makes it actually like human-readable
