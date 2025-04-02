@@ -76,6 +76,10 @@ class BlockConstraints:
                     pass
             return True
 
+    def is_stashed(self):
+        assert self._block is not None
+        assert self.world is not None
+
 
 if __name__ == "__main__":
     from envs.LegoStateSpace.TwoDim.blocks import OneByOne
