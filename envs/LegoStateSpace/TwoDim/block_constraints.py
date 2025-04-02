@@ -6,10 +6,10 @@ import numpy as np
 
 
 class BlockConstraints:
-    def __init__(self, world: Optional[np.ndarray] = None):
+    def __init__(self, lego_world: Optional[np.ndarray] = None):
         self._block = None
         # Please note that here in this class, block is the blocks bound box, not the object.
-        self.world = world
+        self.world = lego_world
 
     @property
     def block(self):
@@ -55,15 +55,37 @@ class BlockConstraints:
             else:
                 return True
 
+    def is_supported(self):
+        # In order for a block to be fully supported its entire width must be supported
+        assert self._block is not None
+        assert self.world is not None
+        row_min_idx, col_min_idx, row_max_idx, col_max_idx = self.get_block()
+        print(row_min_idx, col_min_idx, row_max_idx, col_max_idx)
+        if row_min_idx == 0:
+            # on ground and there must be supported
+            return True
+        else:
+            print(f"aa: {self.world[row_min_idx - 1][col_min_idx: col_max_idx + 1]}")
+            sliced = self.world[row_min_idx - 1][col_min_idx : col_max_idx + 1]
+            # end index needs to be included
+            print(sliced)
+            for i in sliced:
+                if i == 0:
+                    return False
+                else:
+                    pass
+            return True
+
 
 if __name__ == "__main__":
     from envs.LegoStateSpace.TwoDim.blocks import OneByOne
 
-    world = np.array([[1, 1, 1], [2, 2, 3], [1, 2, 1], [1, 1, 1]])
+    world = np.array([[1, 1, 1], [1, 0, 3], [1, 2, 1], [1, 0, 1]])
     block_constraints = BlockConstraints(world)
     block = OneByOne()
-    block.row_min = 0
-    block.col_min = 0
+    block.row_min = 2
+    block.col_min = 1
     block.block_constraints = block_constraints
     block_constraints.block = block.get_block_box()
     print(block_constraints.is_movable())
+    print(block_constraints.is_supported())
