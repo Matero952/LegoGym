@@ -8,7 +8,6 @@ from envs.LegoStateSpace.TwoDim.block_constraints import BlockConstraints
 
 
 class OneByOne:
-    mass = 1
     width = 0
     height = 0
 
@@ -43,7 +42,6 @@ class OneByOne:
 
 
 class TwoByTwo:
-    mass = 4
     width = 1
     height = 1
 
@@ -78,7 +76,6 @@ class TwoByTwo:
 
 
 class OneByTwo:
-    mass = 2
     width = 0
     height = 1
 
@@ -113,7 +110,6 @@ class OneByTwo:
 
 
 class TwoByOne:
-    mass = 2
     width = 1
     height = 0
 
@@ -148,7 +144,7 @@ class TwoByOne:
 
 
 class TwoByThree:
-    mass = 6
+
     width = 1
     height = 2
 
