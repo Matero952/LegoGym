@@ -103,7 +103,7 @@ if __name__ == "__main__":
     block_constraints = BlockConstraints(world)
     block = OneByOne()
     block.row_min = 2
-    block.col_min = 1
+    block.col_min = 2
     block.block_constraints = block_constraints
     block_constraints.block = block.get_block_box()
     print(block_constraints.is_movable())

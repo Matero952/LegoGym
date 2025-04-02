@@ -2,6 +2,7 @@
 # Blocks all have a mass for center of mass calculations, a width, and a height, as well as a row min and column min for
 # defining coordinates. Further, they also have block constraints which the program will use in parallel with environment constraints
 # to determine valid moves.
+# All widths and heights are in indices
 from typing import Optional
 
 from envs.LegoStateSpace.TwoDim.block_constraints import BlockConstraints
