@@ -6,6 +6,10 @@
 # whichever block that the coordinate position is pointing to.
 import numpy as np
 
+from blocks import OneByOne, TwoByTwo, OneByTwo, TwoByOne, TwoByThree
+
+unique_identifiers = {1: OneByOne, 2: TwoByTwo, 3: OneByTwo, 4: TwoByOne, 5: TwoByThree}
+
 
 class PlanarLegoEnvironment(object):
     def __init__(self):
@@ -56,6 +60,12 @@ class PlanarLegoEnvironment(object):
         # space is usually upside down to humans so this makes it actually like human-readable
 
     def step(self, action):
+        assert self._space is not None
+        assert self._space_constraints is not None
+        assert self._blocks is not None
+        assert self._time_step is not None
+        done = False
+
         # Action is like this its probably a good idea to comment this bc otherwise i will lowk forget.
         # [block unique identifier(integer), block to move (row_min, col_min), new placement (row_min_new, col_min_new)]
 
@@ -70,3 +80,10 @@ class PlanarLegoEnvironment(object):
 
     def close(self):
         pass
+
+
+def find_rough_block():
+    pass
+    # This method is for when the agent says a row min and col min that isnt defined so i just when the block they are
+    # pointing to.
+    # TODO Maybe add punishments for repeated undefined row min and col min

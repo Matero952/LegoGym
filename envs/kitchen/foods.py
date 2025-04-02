@@ -1,0 +1,1 @@
+#This class is going to define all of the different foods in the environment as well as like subclasses.
