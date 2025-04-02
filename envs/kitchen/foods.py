@@ -5,6 +5,7 @@ class FoodBase(object):
     def __init__(self):
         pass
 
+
 class Apple:
     def __init__(self):
         self._needs_fridge = False
