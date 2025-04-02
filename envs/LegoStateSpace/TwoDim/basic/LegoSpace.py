@@ -4,8 +4,10 @@ from envs.LegoStateSpace.TwoDim.basic.LegoObjects import (
     Brick,
     LegoEnvironmentGround,
 )
+from envs.LegoStateSpace.TwoDim.basic.LegoPlacements import LegoPlacements5x5
 
 
+# PLEASE NOTE THIS FILE IS DEPRECATED AND MARKED FOR REMOVAL
 class Constraints(object):
     # This is the class for the constraints of the world. There's a bit of physics stuff.
     K_STABILITY = 1
@@ -123,9 +125,9 @@ class LegoSpace(Constraints):
 
     # Define Event Handling (e.g. blocks are placed in illegal positions and there needs to be a notification)
     # WILL BE IMPLEMENTED SOON
-    def __init__(self, np_world):
-        Constraints.__init__(self, np_world)
-        self._config = np_world
+    def __init__(self, seed):
+        Constraints.__init__(self, LegoPlacements5x5(seed))
+        self._config = LegoPlacements5x5(seed)
 
     @property
     def config(self):
