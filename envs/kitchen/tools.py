@@ -1,4 +1,5 @@
 # This file will define all of the tools and utensils in the kitchen
+# TODO Add durability and sharpening logic
 class ToolBase(object):
     def __init__(self):
         pass
