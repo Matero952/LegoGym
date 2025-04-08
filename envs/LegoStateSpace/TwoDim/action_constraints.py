@@ -1,6 +1,6 @@
 import numpy as np
 
-from envs.LegoStateSpace.TwoDim.blocks import OneByOne
+
 
 
 def get_moveable_blocks(world_rep: np.ndarray):
@@ -8,7 +8,7 @@ def get_moveable_blocks(world_rep: np.ndarray):
     moveable_blocks = []
     for row in world_rep:
         for col in row:
-            assert isinstance(col, OneByOne) or col == 0
+            assert isinstance(int, col)
             assert col.block_constraints is not None
             if col.block_constraints.is_movable():
                 moveable_blocks.append(col)
@@ -16,17 +16,25 @@ def get_moveable_blocks(world_rep: np.ndarray):
                 continue
     return moveable_blocks
 
+def get_moveable_spots(state_space, row_length, col_length):
+    moveable_spots = []
+    for idx, i  in enumerate(state_space):
+        cols_above = []
+        for idx2, j in enumerate(state_space[idx::row_length]):
+            cols_above.append(j)
+            if sum(cols_above) > 1:
+                #more than the current block is above
+                break
+            else:
+                pass
+        moveable_spots.append((idx // row_length, idx % col_length))
+    return moveable_spots
 
-def get_available_spots(world_rep: np.ndarray, block):
-    assert world_rep is not None
+def get_available_spots(state_space):
     available_spots = []
-    for row in world_rep:
+    for row in state_space:
         for col in row:
             if col == 0:
-                available_spots.append(col)
-            else:
-                continue
-    available_spots.append(block)
-    # block being moved makes an available space if the agent
-    # just wants to pick it up and keep it in the same space.
+                available_spots.append((row, col))
     return available_spots
+

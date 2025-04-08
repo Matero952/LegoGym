@@ -8,7 +8,7 @@ class Stash(object):
     def __init__(self, world_rep: np.ndarray):
         self.stash = []
         self.capacity = 25
-        #5x5
+        # 5x5
 
     def view_stash(self):
         return self.stash
