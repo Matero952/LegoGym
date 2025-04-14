@@ -1,31 +1,53 @@
-(define (domain LegoWorld)
-    (:requirements :strips :negative-preconditions :typing :adl :derived-predicates)
+(define (domain LegoWorld2d)
+    (:requirements :strips :negative-preconditions :adl :derived-predicates)
     (:predicates
-        (clear)
-        (supported)
-        (trapped)
-        (onground)
-    )
-    (:derived (supported ?i)
-        (onground ?i)
+        (clear ?pos ?row ?col)
+        (supported ?pos ?row ?col)
+        (trapped ?pos ?row ?col)
+        (at ?pos ?row ?col)
     )
     (:action move
         :parameters (
-            ?moveable_space
-            ?available_space
+            ?old_position
+            ?new_position
         )
-        :precondition (and
-        (not (trapped ?moveable_space))
-        (not (clear ?moveable_space))
-        (supported ?available_space)
-        (clear ?available_space)
+        :precondition (and 
         )
-        :effect (and 
-        (clear ?moveable_space)
-        (not (clear ?available_space))
-        )
+        :effect (and )
     )
+    
+
+
 )
+; (define (domain LegoWorld)
+;     (:requirements :strips :negative-preconditions :typing :adl :derived-predicates)
+;     (:predicates
+;         (clear)
+;         (supported)
+;         (trapped)
+;         (onground)
+;         (at ?cell ?x ?y)
+;     )
+;     (:derived (supported ?i)
+;         (onground ?i)
+;     )
+;     (:action move
+;         :parameters (
+;             ?moveable_space
+;             ?available_space
+;         )
+;         :precondition (and
+;         (not (trapped ?moveable_space))
+;         (not (clear ?moveable_space))
+;         (supported ?available_space)
+;         (clear ?available_space)
+;         )
+;         :effect (and 
+;         (clear ?moveable_space)
+;         (not (clear ?available_space))
+;         )
+;     )
+; )
 
 
 
