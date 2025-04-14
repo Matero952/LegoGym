@@ -6,32 +6,25 @@
         (trapped)
         (onground)
     )
-    (:derived (onground ?i)
-        (supported ?i)
+    (:derived (supported ?i)
+        (onground ?i)
     )
     (:action move
         :parameters (
-            ?moveable_block
+            ?moveable_space
             ?available_space
         )
         :precondition (and
-        (not (trapped ?moveable_block))
-        (or (supported ?available_space) (onground ?available_space))
+        (not (trapped ?moveable_space))
+        (not (clear ?moveable_space))
+        (supported ?available_space)
         (clear ?available_space)
         )
         :effect (and 
+        (clear ?moveable_space)
         (not (clear ?available_space))
         )
     )
-
-    
-
-
-
-
-
-
-
 )
 
 
