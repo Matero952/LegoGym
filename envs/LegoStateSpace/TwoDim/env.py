@@ -6,11 +6,6 @@
 # whichever block that the coordinate position is pointing to.
 import numpy as np
 
-from blocks import OneByOne, TwoByTwo, OneByTwo, TwoByOne, TwoByThree
-
-unique_identifiers = {1: OneByOne, 2: TwoByTwo, 3: OneByTwo, 4: TwoByOne, 5: TwoByThree}
-
-
 class PlanarLegoEnvironment(object):
     def __init__(self):
         self._space = None
