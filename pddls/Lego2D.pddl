@@ -1,3 +1,88 @@
+(define (domain LegoWorld)
+    (:requirements :strips :negative-preconditions :typing :adl)
+    (:predicates
+        (clear)
+        (supported)
+        (trapped)
+        (onground)
+    )
+    (:action move
+        :parameters (
+            ?moveable_block
+            ?available_space
+        )
+        :precondition (and
+        (not (trapped ?moveable_block))
+        (or (supported ?available_space) (onground ?available_space))
+
+
+        
+        
+        )
+        :effect (and )
+    )
+    
+
+
+
+
+
+
+
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 (domain (domain Lego2D)
     (:requirements :strips)
     (:predicates
@@ -64,6 +149,8 @@
             (holding ?i)
             (clear ?j)
         )
+    )
+)
     )
 )
 
