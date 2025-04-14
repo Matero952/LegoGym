@@ -1,10 +1,13 @@
 (define (domain LegoWorld)
-    (:requirements :strips :negative-preconditions :typing :adl)
+    (:requirements :strips :negative-preconditions :typing :adl :derived-predicates)
     (:predicates
         (clear)
         (supported)
         (trapped)
         (onground)
+    )
+    (:derived (onground ?i)
+        (supported ?i)
     )
     (:action move
         :parameters (
@@ -14,13 +17,13 @@
         :precondition (and
         (not (trapped ?moveable_block))
         (or (supported ?available_space) (onground ?available_space))
-
-
-        
-        
+        (clear ?available_space)
         )
-        :effect (and )
+        :effect (and 
+        (not (clear ?available_space))
+        )
     )
+
     
 
 
