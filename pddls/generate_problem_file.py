@@ -13,7 +13,7 @@ def generate_problem_file(out_file, seed):
         f.write(
             '''(define (problem LegoProblem2d) (:domain LegoWorld2d)\
             
-            
+
                 (:objects 
                     r0 r1 r2 r3 r4 c0 c1 c2 c3 c4
                 )
@@ -61,12 +61,14 @@ def generate_string(state):
                 if r_idx == max_row_idx:
                     state_str += f"     (moveable r{r_idx} c{c_idx})\n"
                     continue
-                elif state[r_idx + 1][c_idx] == 0:
+                if r_idx == 0:
+                    state_str += f"     (on_ground r{r_idx} c{c_idx})\n" 
+                if state[r_idx + 1][c_idx] == 0:
                     state_str += f"     (moveable r{r_idx} c{c_idx})\n"
-                elif state[r_idx + 1][c_idx] == 1:
+                if state[r_idx + 1][c_idx] == 1:
                     state_str += f"     (occupied r{r_idx} c{c_idx})\n "
     return state_str
-generate_problem_file("pddls/LegoProblem2d.pddl", 1)
+generate_problem_file("LegoProblem2d.pddl", 15678)
 
 
 

@@ -33,6 +33,8 @@ def generate_full_config_dict(full_config):
     return full_cfg_dict
 
 
-if __name__ == "main":
-    print(generate(5, 5, 5))
+if __name__ == "__main__":
+    config = generate_full_config()
+    d = generate_full_config_dict(config)
+    print(d[1])
 #im not gonna lie i copy and pasted this code
