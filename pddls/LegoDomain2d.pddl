@@ -1,5 +1,5 @@
 (define (domain LegoWorld2d)
-    (:requirements :strips :negative-preconditions :disjunctive-preconditions)
+    (:requirements :strips :negative-preconditions :disjunctive-preconditions :conditional-effects)
     (:predicates
         (clear ?row ?col)
         (moveable ?row ?col)
@@ -27,13 +27,19 @@
         )
         :effect (and
             (when (occupied ?old_below_row ?old_below_col)
-                (not (occupied ?old_below_row ?old_below_col))
-                (moveable ?old_below_row ?old_below_col))
+                (and
+                    (not (occupied ?old_below_row ?old_below_col))
+                    (moveable ?old_below_row ?old_below_col)
+                )
+            )
             (when (on_ground ?old_row ?old_col)
-                (not (on_ground ?old_row ?old_col))
-                (clear ?old_row ?old_col)
+                (and
+                    (not (on_ground ?old_row ?old_col))
+                    (occupied ?old_row ?old_col)
+                )
             )
             ;on ground only applies if occupied
+            (not (moveable ?old_row ?old_col))
             (not (clear ?new_row ?new_col))
             (moveable ?new_row ?new_col)
             )

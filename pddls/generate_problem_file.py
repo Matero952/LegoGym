@@ -68,7 +68,7 @@ def generate_string(state):
                 if state[r_idx + 1][c_idx] == 1:
                     state_str += f"     (occupied r{r_idx} c{c_idx})\n "
     return state_str
-generate_problem_file("LegoProblem2d.pddl", 15678)
+generate_problem_file("LegoProblem2d.pddl", 1)
 
 
 
