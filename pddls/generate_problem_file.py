@@ -57,15 +57,19 @@ def generate_string(state):
             if col == 0:
                 state_str += f" (clear r{r_idx} c{c_idx})\n"
                 state_str += f" (not (occupied r{r_idx} c{c_idx}))\n"
+                state_str += f" (not (moveable r{r_idx} c{c_idx}))\n"
             elif col == 1:
                 state_str += f" (occupied r{r_idx} c{c_idx})\n"
                 state_str += f" (not (clear r{r_idx} c{c_idx}))\n"
                 if r_idx == max_row_idx:
+                    state_str += f" (moveable r{r_idx} c{c_idx})\n"
                     continue
+                elif state[r_idx + 1][c_idx] == 0:
+                    state_str += f" (moveable r{r_idx} c{c_idx})\n"
                 elif state[r_idx + 1][c_idx] == 1:
-                    state_str += f" (trapped r{r_idx} c{c_idx})\n"
+                    state_str += f" (not (moveable r{r_idx} c{c_idx}))\n "
     return state_str
-generate_problem_file("C:/Users/mateo/Github/mateogym/pddls/LegoProblem2d.pddl", 15000)
+generate_problem_file("C:/Users/mateo/Github/mateogym/pddls/LegoProblem2d.pddl", 2)
 # print(generate_string(generate_problem_file("hehe.txt", 1)))
 
 
