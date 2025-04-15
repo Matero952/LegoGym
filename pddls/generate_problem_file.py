@@ -9,6 +9,25 @@ def generate_problem_file(out_file, seed):
     start, end = problem
     init_block = generate_string(start)
     goal_block = generate_string(end)
+    with open(out_file, "w") as f:
+        pass
+        #clears file i think
+    with open(out_file, "w") as f:
+        f.write(
+            '''(define (problem LegoProblem2d) (:domain LegoWorld2d)
+                (:objects 
+                    r0 r1 r2 r3 r4 c0 c1 c2 c3 c4
+                )
+
+                (:init
+    
+                )
+
+                (:goal (and
+
+                )))'''
+                )
+
     with open(out_file, "r") as f:
         lines = f.readlines()
         for idx, line in enumerate(lines):
@@ -46,7 +65,7 @@ def generate_string(state):
                 elif state[r_idx + 1][c_idx] == 1:
                     state_str += f" (trapped r{r_idx} c{c_idx})\n"
     return state_str
-generate_problem_file("C:/Users/mateo/Github/mateogym/pddls/LegoProblem2d.pddl", 1)
+generate_problem_file("C:/Users/mateo/Github/mateogym/pddls/LegoProblem2d.pddl", 15000)
 # print(generate_string(generate_problem_file("hehe.txt", 1)))
 
 
