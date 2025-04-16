@@ -52,14 +52,8 @@
                 (not (moveable (- ?new_row 1) ?new_col))
                 (not (clear ?new_row ?new_col))
                 (moveable ?new_row ?new_col)
-                 
                 )
             )
         )
-
-    
     )
-
-
-
 )

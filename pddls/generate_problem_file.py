@@ -11,12 +11,10 @@ def generate_problem_file(out_file, seed):
     goal_block = generate_string(end)
     with open(out_file, "w") as f:
         f.write(
-            '''(define (problem LegoProblem2d) (:domain LegoWorld2dAdjacency)\
+            '''(define (problem LegoProblem2d) (:domain plswork)
             
 
-                (:objects 
-                    r0 r1 r2 r3 r4 c0 c1 c2 c3 c4
-                )
+
 
                 
                 (:init
@@ -56,24 +54,21 @@ def generate_string(state):
     for r_idx, row in enumerate(state):
         for c_idx, col in enumerate(row):
             if col == 0:
-                state_str += f"(clear r{r_idx} c{c_idx})\n"
+                state_str += f"(clear {r_idx} {c_idx})\n"
                 if r_idx == 0:
-                    state_str += f"(on_ground r{r_idx} c{c_idx})\n"
+                    state_str += f"(on_ground {r_idx} {c_idx})\n"
             elif col == 1:
                 if r_idx == max_row_idx:
-                    state_str += f"(moveable r{r_idx} c{c_idx})\n"
-                    state_str += f"(is_above r{r_idx} c{c_idx} r{r_idx - 1} c{c_idx}\n)"
+                    state_str += f"(moveable {r_idx} {c_idx})\n"
                     continue
                 if r_idx == 0:
-                    state_str += f"(on_ground r{r_idx} c{c_idx})\n"
-                else:
-                    state_str += f"(is_above r{r_idx} c{c_idx} r{r_idx - 1} c{c_idx})\n " 
+                    state_str += f"(on_ground {r_idx} {c_idx})\n"
                 if state[r_idx + 1][c_idx] == 0:
-                    state_str += f"(moveable r{r_idx} c{c_idx})\n"
+                    state_str += f"(moveable {r_idx} {c_idx})\n"
                 if state[r_idx + 1][c_idx] == 1:
-                    state_str += f"(trapped r{r_idx} c{c_idx})\n "
+                    state_str += f"(not (moveable {r_idx} {c_idx}))\n "
     return state_str
-generate_problem_file("LegoProblem2d.pddl", 1)
+generate_problem_file("pddls/LegoProblem2d.pddl", 1)
 
 
 
