@@ -57,6 +57,8 @@ def generate_string(state):
         for c_idx, col in enumerate(row):
             if col == 0:
                 state_str += f"(clear r{r_idx} c{c_idx})\n"
+                if r_idx == 0:
+                    state_str += f"(on_ground r{r_idx} c{c_idx})\n"
             elif col == 1:
                 if r_idx == max_row_idx:
                     state_str += f"(moveable r{r_idx} c{c_idx})\n"

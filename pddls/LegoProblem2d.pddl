@@ -8,9 +8,13 @@
                 (:init
 
 (clear r0 c0)
+(on_ground r0 c0)
 (clear r0 c1)
+(on_ground r0 c1)
 (clear r0 c2)
+(on_ground r0 c2)
 (clear r0 c3)
+(on_ground r0 c3)
 (on_ground r0 c4)
 (trapped r0 c4)
  (clear r1 c0)
@@ -36,15 +40,19 @@
 (clear r4 c2)
 (clear r4 c3)
 (moveable r4 c4)
-(is_above r4 c4 r3 c4)
+(is_above r4 c4 r3 c4
+)
     
                 )
 
                 (:goal (and
 
 (clear r0 c0)
+(on_ground r0 c0)
 (clear r0 c1)
+(on_ground r0 c1)
 (clear r0 c2)
+(on_ground r0 c2)
 (on_ground r0 c3)
 (moveable r0 c3)
 (on_ground r0 c4)
