@@ -13,6 +13,8 @@
             ?old_below_col
             ?old_row 
             ?old_col
+            ?new_below_row
+            ?new_below_col
             ?new_row 
             ?new_col
         )
@@ -46,6 +48,15 @@
                 (on_ground ?new_row ?new_col))
                 (on_ground ?new_row ?new_col)
             )
+            (when (and 
+                (or (not (= ?new_row ?old_row)) (not (= ?new_col ?old_col)))
+                (not (on_ground ?new_row ?new_col)))
+                (and 
+                (trapped ?new_below_row ?new_below_col)
+                (not (moveable ?new_below_row ?new_below_col))
+                )
+            )
+
 
         )
     ) 
