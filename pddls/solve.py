@@ -14,5 +14,5 @@ def solve_problem(engine_name, domain_file, problem_file):
         else:
             print("No plan found.")
 
-solve_problem("fast-downward", "LegoDomain2d.pddl", "LegoProblem2d.pddl")
+solve_problem("fast-downward", "lego_domain_2d_w_adjacency.pddl", "LegoProblem2d.pddl")
 

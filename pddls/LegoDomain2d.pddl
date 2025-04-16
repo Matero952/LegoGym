@@ -6,10 +6,6 @@
         (occupied ?row ?col)
         (on_ground ?row ?col)
     )
-    ; (:derived (occupied ?row ?col)
-    ;     and ((not (clear ?row ?col))
-    ;     (not (moveable ?row ?col))
-    ; )
 
     (:action move
         :parameters (
@@ -38,7 +34,6 @@
                     (occupied ?old_row ?old_col)
                 )
             )
-            ;on ground only applies if occupied
             (not (moveable ?old_row ?old_col))
             (not (clear ?new_row ?new_col))
             (moveable ?new_row ?new_col)
