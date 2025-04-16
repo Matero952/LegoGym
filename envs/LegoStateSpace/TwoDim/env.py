@@ -5,6 +5,22 @@
 # TODO Add functionality where the agent doesnt exactly choose the actual min and max of a block so you just override it to
 # whichever block that the coordinate position is pointing to.
 import numpy as np
+from parse_action import *
+from pddls.seeding import *
+class legoenv(object):
+    def __init__(self, space, time_step):
+        self._space = space
+        self._time_step = time_step
+
+    def step(self, action):
+        assert self._space is not None
+        assert self._time_step is not None
+        start_idxs, end_idxs = parse_action(action)
+        start_row, start_col = start_idxs
+        end_row, end_col = end_idxs
+        self._space[start_row][start_col] = 0
+        self._space[end_row][end_col] = 1
+
 
 class PlanarLegoEnvironment(object):
     def __init__(self):
@@ -76,9 +92,3 @@ class PlanarLegoEnvironment(object):
     def close(self):
         pass
 
-
-def find_rough_block():
-    pass
-    # This method is for when the agent says a row min and col min that isnt defined so i just when the block they are
-    # pointing to.
-    # TODO Maybe add punishments for repeated undefined row min and col min

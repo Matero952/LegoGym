@@ -13,6 +13,7 @@ def solve_problem(engine_name, domain_file, problem_file):
             print("Pyperplan returned: %s" % result.plan)
         else:
             print("No plan found.")
+        return result
 
 solve_problem("lpg", "pddls/new_lego_pls_work.pddl", "pddls/LegoProblem2d.pddl")
 

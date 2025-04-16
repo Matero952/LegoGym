@@ -30,11 +30,3 @@ def get_moveable_spots(state_space, row_length, col_length):
         moveable_spots.append((idx // row_length, idx % col_length))
     return moveable_spots
 
-# def get_available_spots(state_space):
-#     available_spots = []
-#     for row in state_space:
-#         for col in row:
-#             if col == 0:
-#                 available_spots.append((row, col))
-#     return available_spots
-
