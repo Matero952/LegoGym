@@ -1,13 +1,14 @@
 (define (domain plswork)
-    (:requirements :strips :negative-preconditions :conditional-effects :numeric-fluents)
+    (:requirements :strips :negative-preconditions :conditional-effects :numeric-fluents :typing)
+    (:types row col)
     (:predicates
-        (moveable ?row ?col)
-        (on_ground ?row ?col)
-        (clear ?row ?col)
+        (moveable ?row - row ?col - col)
+        (on_ground ?row - row ?col - col)
+        (clear ?row - row ?col - col)
     )
     (:functions
-        (block_pos_row ?int)
-        (block_pos_col ?int)
+        (block_pos_row ?r - row)
+        (block_pos_col ?c - col)
     )
     (:action move
         :parameters (
@@ -18,13 +19,12 @@
 
         )
         :precondition (and 
-
+            (moveable ?old_row ?old_col)
+            (clear ?new_row ?new_col)
             (= (block_pos_row ?old_row) ?old_row)
             (= (block_pos_col ?old_col) ?old_col) 
             (= (block_pos_row ?new_row) ?new_row)
             (= (block_pos_col ?new_col) ?new_col) 
-            (moveable ?old_row ?old_col)
-            (clear ?new_row ?new_col)
 
         )
         :effect (and 
