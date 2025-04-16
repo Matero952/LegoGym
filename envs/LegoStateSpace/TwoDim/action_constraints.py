@@ -1,32 +1,46 @@
 import numpy as np
-
-
-
-
-def get_moveable_blocks(world_rep: np.ndarray):
-    assert world_rep is not None
-    moveable_blocks = []
-    for row in world_rep:
-        for col in row:
-            assert isinstance(int, col)
-            assert col.block_constraints is not None
-            if col.block_constraints.is_movable():
-                moveable_blocks.append(col)
-            else:
-                continue
-    return moveable_blocks
+from action_space import *
+from pathlib import Path
+import sys
+pddls_directory = Path.cwd() / 'pddls'
+sys.path.append(str(pddls_directory))
+from seeding import *
 
 def get_moveable_spots(state_space, row_length, col_length):
     moveable_spots = []
-    for idx, i  in enumerate(state_space):
-        cols_above = []
-        for idx2, j in enumerate(state_space[idx::row_length]):
-            cols_above.append(j)
-            if sum(cols_above) > 1:
-                #more than the current block is above
-                break
+    moveable_blocks = []
+    for r_idx, row  in enumerate(state_space):
+        for c_idx, col in enumerate(row):
+            if r_idx == (row_length - 1):
+                if col == 0:
+                    moveable_spots.append((r_idx, c_idx))
+                else:
+                    moveable_blocks.append((r_idx, c_idx))
+            elif state_space[r_idx + 1][c_idx] == 1:
+                continue
             else:
-                pass
-        moveable_spots.append((idx // row_length, idx % col_length))
-    return moveable_spots
+                if col == 0:
+                    moveable_spots.append((r_idx, c_idx))
+                else:
+                    moveable_blocks.append((r_idx, c_idx))
+    print(f"len: {len(moveable_blocks)}")
+    return moveable_spots, moveable_blocks
+
+def get_available_actions(state_space, row_length, col_length):
+    moveable_spots, moveable_blocks = get_moveable_spots(state_space, row_length, col_length)
+    action_space = ActionSpace((5, 5))
+    valid_actions = []
+    all_actions = action_space.get_all_actions()
+    for action in all_actions:
+        if action[0] in moveable_blocks and action[1] in moveable_spots:
+            valid_actions.append(action)
+        else:
+            continue
+    return valid_actions
+
+if __name__ == "__main__":
+    full_config = generate_full_config()
+    full_config_dict = generate_full_config_dict(full_config)
+    state = full_config_dict[1000][0]
+    print(len(get_available_actions(state, 5, 5)))
 
