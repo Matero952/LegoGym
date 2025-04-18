@@ -26,7 +26,8 @@ def get_moveable_spots(state_space, row_length, col_length):
     print(f"len: {len(moveable_blocks)}")
     return moveable_spots, moveable_blocks
 
-def get_available_actions(state_space, row_length, col_length):
+def get_available_actions(state_space):
+    row_length, col_length = np.shape(state_space)
     moveable_spots, moveable_blocks = get_moveable_spots(state_space, row_length, col_length)
     action_space = ActionSpace((5, 5))
     valid_actions = []
@@ -36,11 +37,13 @@ def get_available_actions(state_space, row_length, col_length):
             valid_actions.append(action)
         else:
             continue
+    print(valid_actions)
     return valid_actions
 
 if __name__ == "__main__":
     full_config = generate_full_config()
     full_config_dict = generate_full_config_dict(full_config)
     state = full_config_dict[1000][0]
-    print(len(get_available_actions(state, 5, 5)))
+    print(np.shape(state))
+    print(len(get_available_actions(state)))
 
