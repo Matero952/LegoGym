@@ -73,7 +73,8 @@ def generate_string(state):
                     state_str += f"(not (moveable r{r_idx} c{c_idx}))"
                     state_str += f"(trapped r{r_idx} c{c_idx})"
     return state_str
-generate_problem_file("pddls/LegoProblem2d.pddl", 15000)
+if __name__ == "__main__":
+    generate_problem_file("pddls/LegoProblem2d.pddl", 15000)
 
 
 

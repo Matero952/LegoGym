@@ -14,6 +14,6 @@ def solve_problem(engine_name, domain_file, problem_file):
         else:
             print("No plan found.")
         return result
-
-solve_problem("fast-downward", "pddls/domain.pddl", "pddls/LegoProblem2d.pddl")
+if __name__ == "__main__":
+    solve_problem("fast-downward", "pddls/domain.pddl", "pddls/LegoProblem2d.pddl")
 
