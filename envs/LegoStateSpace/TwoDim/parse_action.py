@@ -1,7 +1,6 @@
 import ast
 def parse_action(action: str):
     action_str = list(action)
-    print(action_str)
     numbers = []
     for i in action_str:
         if i.isdigit():
