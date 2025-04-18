@@ -11,23 +11,13 @@ def generate_problem_file(out_file, seed):
     goal_block = generate_string(end)
     with open(out_file, "w") as f:
             f.write(f'''(define (problem LegoProblem2d)
-    (:domain plswork)
+    (:domain pleasework)
     (:objects
     r0 r1 r2 r3 r4 - row
     c0 c1 c2 c3 c4 - col
     )
     
     (:init
-    (= (block_pos_row r0) 0)
-    (= (block_pos_row r1) 1)
-    (= (block_pos_row r2) 2)
-    (= (block_pos_row r3) 3)
-    (= (block_pos_row r4) 4)
-    (= (block_pos_col c0) 0)
-    (= (block_pos_col c1) 1)
-    (= (block_pos_col c2) 2)
-    (= (block_pos_col c3) 3)
-    (= (block_pos_col c4) 4)
     {init_block}
     )
     (:goal
@@ -61,23 +51,29 @@ def generate_string(state):
     max_row_idx = max_row_idx - 1
     max_col_idx = max_col_idx -1
     for r_idx, row in enumerate(state):
+        if r_idx != 0:
+            state_str += f"(is_above r{r_idx} r{r_idx - 1})"
         for c_idx, col in enumerate(row):
             if col == 0:
                 state_str += f"(clear r{r_idx} c{c_idx})"
-                if r_idx == 0:
-                    state_str += f"(on_ground r{r_idx} c{c_idx})"
+                state_str += f"(not (block_at r{r_idx} c{c_idx}))"
+                state_str += f"(not (moveable r{r_idx} c{c_idx}))"
+                state_str += f"(not (trapped r{r_idx} c{c_idx}))"
             elif col == 1:
+                state_str += f"(block_at r{r_idx} c{c_idx})"
+                state_str += f"(not (clear r{r_idx} c{c_idx}))"
                 if r_idx == max_row_idx:
                     state_str += f"(moveable r{r_idx} c{c_idx})"
+                    state_str += f"(not (trapped r{r_idx} c{c_idx}))"
                     continue
-                if r_idx == 0:
-                    state_str += f"(on_ground r{r_idx} c{c_idx})"
                 if state[r_idx + 1][c_idx] == 0:
                     state_str += f"(moveable r{r_idx} c{c_idx})"
-                if state[r_idx + 1][c_idx] == 1:
+                    state_str += f"(not (trapped r{r_idx} c{c_idx}))"
+                elif state[r_idx + 1][c_idx] == 1:
                     state_str += f"(not (moveable r{r_idx} c{c_idx}))"
+                    state_str += f"(trapped r{r_idx} c{c_idx})"
     return state_str
-generate_problem_file("LegoProblem2d.pddl", 1)
+generate_problem_file("pddls/LegoProblem2d.pddl", 15000)
 
 
 
