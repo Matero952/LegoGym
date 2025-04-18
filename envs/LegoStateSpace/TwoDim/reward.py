@@ -2,5 +2,6 @@
 #/remaining path length and compare. Maybe negative reward it if the path length difference exceeds x actions.
 def get_reward(episode_plan, move):
     #example move = 
+    pass
 
     
