@@ -12,10 +12,10 @@
     )
     (:action move
         :parameters (
-            ?old_row
-            ?old_col
-            ?new_row
-            ?new_col
+            ?old_row - row
+            ?old_col - col
+            ?new_row - row
+            ?new_col - col
         )
         :precondition (and 
             (block_at ?old_row ?old_col)
@@ -52,5 +52,6 @@
                     (trapped ?lower ?new_col)
                 )
             )
+        )
     )
 )
