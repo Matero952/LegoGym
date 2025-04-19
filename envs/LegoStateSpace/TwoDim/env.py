@@ -7,19 +7,31 @@
 import numpy as np
 from parse_action import *
 from pddls.seeding import *
+from action_mapping import *
 class legoenv(object):
-    def __init__(self, space, time_step):
-        self._space = space
-        self._time_step = time_step
+    def __init__(self, episode, trunc_limit):
+        self.episode = episode
+        self.trunc_limit = trunc_limit
+        self.state = None
+    
+    def step(self, action_idx: int):
+        action = generate_action_mapping()[action_idx]
+        start_block, end_pos = parse_action(action)
+        start_r, start_c = start_block
+        end_r, end_c = end_pos
+        self.state[start_r][start_c] = 0
+        self.state[end_r][end_c] = 1
 
-    def step(self, action):
-        assert self._space is not None
-        assert self._time_step is not None
-        start_idxs, end_idxs = parse_action(action)
-        start_row, start_col = start_idxs
-        end_row, end_col = end_idxs
-        self._space[start_row][start_col] = 0
-        self._space[end_row][end_col] = 1
+
+
+    # def step(self, action):
+    #     assert self._space is not None
+    #     assert self._time_step is not None
+    #     start_idxs, end_idxs = parse_action(action)
+    #     start_row, start_col = start_idxs
+    #     end_row, end_col = end_idxs
+    #     self._space[start_row][start_col] = 0
+    #     self._space[end_row][end_col] = 1
 
 
 # class PlanarLegoEnvironment(object):

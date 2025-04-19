@@ -6,23 +6,14 @@ sys.path.append(str(pddls_directory))
 from seeding import *
 from solve import *
 from generate_problem_file import *
-def generate_episode_plan(seed):
+from action_mapping import *
+def generate_trajectory_plan(seed):
+    
     '''trajectory kinda looks like this:
     {0:{state_before_action1, action1, reward1, doneflag1} 
     1:{state_after_action1butbeforeaction2, action2, reward2, doneflag2}
     2:... 3:...}
-    
-    
-    
     '''
-
-
-
-
-
-
-
-
     episode_plan = {}
     generate_problem_file("pddls/LegoProblem2d.pddl", seed)
     config = generate_full_config()
@@ -45,7 +36,7 @@ def generate_episode_plan(seed):
             state[r_start][c_start] = 0
             state[r_end][c_end] = 1
             episode_plan[idx]['before_action'] = state
-        episode_plan[idx]['action'] = sol_plan[idx]
+        episode_plan[idx]['action'] = generate_action_mapping()[sol_plan[idx]]
         episode_plan[idx]['reward'] = 1
         if idx == (plan_length - 1):
             #at the end
@@ -65,5 +56,5 @@ def generate_episode_plan(seed):
 
 
 if __name__ == "__main__":
-    generate_episode_plan(15000)
+    generate_trajectory_plan(15000)
 
