@@ -37,4 +37,5 @@ if __name__ == "__main__":
     config = generate_full_config()
     d = generate_full_config_dict(config)
     print(d[1])
+    print(len(d))
 #im not gonna lie i copy and pasted this code

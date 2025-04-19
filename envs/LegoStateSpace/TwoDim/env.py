@@ -4,13 +4,17 @@
 # TODO Add pathing please <3
 # TODO Add functionality where the agent doesnt exactly choose the actual min and max of a block so you just override it to
 # whichever block that the coordinate position is pointing to.
+from typing import Optional
 import numpy as np
 from parse_action import *
 from pddls.seeding import *
 from action_mapping import *
+from get_reward import *
+from generate_classic_episode import *
+import random
 class legoenv(object):
-    def __init__(self, episode, trunc_limit):
-        self.episode = episode
+    def __init__(self, episode_seed, trunc_limit):
+        self.episode = generate_classic_episode(episode_seed)
         self.trunc_limit = trunc_limit
         self.state = None
         self.move_count = 0
@@ -24,7 +28,17 @@ class legoenv(object):
         self.state[end_r][end_c] = 1
         self.move_count += 1
         best_move_count_left = self.episode['min_moves'] - self.move_count
+        reward = get_reward(self.state, self.episode['end']['state'], 0.1, self.move_count, 
+                            best_move_count_left)
+        #TODO FINISH THIS FUNCTION
 
+    def reset(self, rng: Optional[int] = None):
+        if rng is not None:
+            rand_seed = random.seed(rng)
+        else:
+            rand_seed = random.randint(0, 15876)
+        self.episode = generate_classic_episode(rand_seed)
+        return None
 
 
     # def step(self, action):
