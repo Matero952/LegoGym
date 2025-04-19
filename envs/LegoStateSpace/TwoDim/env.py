@@ -11,6 +11,8 @@ from pddls.seeding import *
 from action_mapping import *
 from get_reward import *
 from generate_classic_episode import *
+from action_constraints import *
+from action_space import *
 import random
 class legoenv(object):
     def __init__(self, episode_seed, trunc_limit):
@@ -18,6 +20,8 @@ class legoenv(object):
         self.trunc_limit = trunc_limit
         self.state = None
         self.move_count = 0
+        self.truncated = False
+        self.terminated = False
     
     def step(self, action_idx: int):
         action = generate_action_mapping()[action_idx]
@@ -30,7 +34,13 @@ class legoenv(object):
         best_move_count_left = self.episode['min_moves'] - self.move_count
         reward = get_reward(self.state, self.episode['end']['state'], 0.1, self.move_count, 
                             best_move_count_left)
-        #TODO FINISH THIS FUNCTION
+        new_available_actions = get_available_actions(self.state)
+        if self.move_count >= self.trunc_limit:
+            self.truncated = True
+        if np.array_equal(self.state, self.episode['end']['state']):
+            self.terminated = True
+        return self.state, new_available_actions, reward, self.truncated, self.terminated
+
 
     def reset(self, rng: Optional[int] = None):
         if rng is not None:

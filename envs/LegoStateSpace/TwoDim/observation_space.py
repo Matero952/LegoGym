@@ -14,5 +14,6 @@
 # import gymnasium.envs.classic_control   
 # def get_observation(state_before, action, episode_seed, max_time_steps):
 
-
+def get_observation(new_state):
+    
 
