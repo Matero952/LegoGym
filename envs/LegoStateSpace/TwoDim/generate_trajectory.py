@@ -36,7 +36,8 @@ def generate_trajectory_plan(seed):
             state[r_start][c_start] = 0
             state[r_end][c_end] = 1
             episode_plan[idx]['before_action'] = state
-        episode_plan[idx]['action'] = generate_action_mapping()[sol_plan[idx]]
+        episode_plan[idx]['action'] = [k for k, v in generate_action_mapping().items() if v == sol_plan[idx]][0]
+        # episode_plan[idx]['action'] = generate_action_mapping()[sol_plan[idx]]
         episode_plan[idx]['reward'] = 1
         if idx == (plan_length - 1):
             #at the end

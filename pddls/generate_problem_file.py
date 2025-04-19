@@ -4,6 +4,29 @@ from seeding import *
 import numpy as np
 import re as re
 
+def generate_problem_file_with_state(out_file, states):
+    start, end = states
+    init_block = generate_string(start)
+    goal_block = generate_string(end)
+    with open(out_file, "w") as f:
+            f.write(f'''(define (problem LegoProblem2d)
+    (:domain pleasework)
+    (:objects
+    r0 r1 r2 r3 r4 - row
+    c0 c1 c2 c3 c4 - col
+    )
+    
+    (:init
+    {init_block}
+    )
+    (:goal
+    (and
+    {goal_block}
+    )
+    )
+    )
+''') 
+
 def generate_problem_file(out_file, seed):
     problem = generate_full_config_dict(generate_full_config())[seed]
     start, end = problem

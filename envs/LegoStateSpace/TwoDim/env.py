@@ -13,6 +13,7 @@ class legoenv(object):
         self.episode = episode
         self.trunc_limit = trunc_limit
         self.state = None
+        self.move_count = 0
     
     def step(self, action_idx: int):
         action = generate_action_mapping()[action_idx]
@@ -21,6 +22,8 @@ class legoenv(object):
         end_r, end_c = end_pos
         self.state[start_r][start_c] = 0
         self.state[end_r][end_c] = 1
+        self.move_count += 1
+        best_move_count_left = self.episode['min_moves'] - self.move_count
 
 
 
