@@ -29,7 +29,6 @@ def run_experiment(experiment, suffix=""):
         new_df = pd.DataFrame(
             columns=["seed", "next_best_move", "predicted_next_best_move", "best_path_length", "agent_path_length"])
         print(f"Created new dataframe")
-    estimated_time_remaining = 0
     correct = 0
     seen = 0
     config = generate_full_config()
@@ -40,7 +39,7 @@ def run_experiment(experiment, suffix=""):
             if to_check_row.iloc[0]["agent_path_length"] <= to_check_row.iloc[0]["best_path_length"]:
                 correct += 1
                 seen += 1
-            else:
+            elif to_check_row.iloc[0]["agent_path_length"] > to_check_row.iloc[0]["best_path_length"]:
                 correct += 0
                 seen += 1
             continue
@@ -49,15 +48,11 @@ def run_experiment(experiment, suffix=""):
         generate_problem_file_with_state('pddls/LegoProblem2d.pddl', (start, end))
         best_solution = solve_problem("fast-downward", "pddls/domain.pddl", "pddls/LegoProblem2d.pddl")
         best_plan_length = len(best_solution.plan._actions)
-        print(best_plan_length)
-        breakpoint()
-        print(start)
-        print(end)
         action_match = experiment.process_sample(start, end)
         start_block, end_cell = parse_action(action_match)
         s_r, s_c = start_block
         e_r, e_c = end_cell
-        action_statement = f"move(r{s_r} c{s_c} r{e_r} c{e_c})"
+        action_statement = f"move(r{s_r}, c{s_c}, r{e_r}, c{e_c})"
         start[s_r][s_c] = 0
         end[e_r][e_c] = 1
         # agent_path_length = ((get_reward(start, end, 1, best_plan_length - 1)) / -1) + best_plan_length + 1
@@ -83,7 +78,6 @@ def run_experiment(experiment, suffix=""):
         new_df.loc[len(new_df)] = result
         if seed % 10 == 0:
             new_df.to_csv(newdf_path, index=False)
-        end_time = time.time()
     new_df.to_csv(newdf_path, index=False)
     return experiment.model_name, correct/seen, correct, seen
         
