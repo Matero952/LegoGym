@@ -11,3 +11,4 @@ from solve import *
 sys.path.append(str(envs_directory))
 from LegoStateSpace.TwoDim.parse_action import *
 
+def run_experiment(experiment):

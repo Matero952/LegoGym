@@ -9,7 +9,7 @@ Write your answer like this: 'move rx cy rx1 cy1' where rx is the blocks old row
 is the blocks new row index, and cy1 is the blocks new col index. If there is no move necessary to reach the goal state, please write ' '.
 Given this start state:
 {start_state}
-What is the next best move in order to reach this end state:
+What is the next best move to reach this end state:
 {end_state}
 '''
     return prompt
