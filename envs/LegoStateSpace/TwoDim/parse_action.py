@@ -7,8 +7,10 @@ def parse_action(action: str):
             numbers.append(int(i))
         else:
             continue
+        if len(numbers) >= 4:
+            break
     start_block = (numbers[0], numbers[1])
     end_pos = (numbers[2], numbers[3])
     return start_block, end_pos
 if __name__ == "__main__":
-    print(parse_action("move 1 1 2 2"))
+    print(parse_action("move 1 1 2 22222"))

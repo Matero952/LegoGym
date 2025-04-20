@@ -1,4 +1,4 @@
-from TwoDim.parse_action import *
+from envs.LegoStateSpace.TwoDim.parse_action import *
 import re as re
 import os
 import anthropic
@@ -21,13 +21,5 @@ class ClaudeExperiment:
         print(f"Response: {response}")
         result = response.content[0].text
         print(f"Response: {result}")
-        pick_match = re.search(r"(?i)pick\s*:\s*(.*)", result)
-        print(f"Pick match: {pick_match}")
-        place_match = re.search(r"(?i)place\s*:\s*(.*)", result)
-        print(f"Place match: {place_match}")
-        pick_str = pick_match.group(1).strip()
-        print(f"Pick string: {pick_str}")
-        place_str = place_match.group(1).strip()
-        print(f"Place string: {place_str}")
-        output = {"pick": pick_str, "place": place_str}
-        return result, output
+        action_match = re.search(r"(move.{0,7})", result)
+        return result, action_match

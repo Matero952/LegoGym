@@ -1,4 +1,5 @@
 from openai import OpenAI
+import re
 class grokexperiment:
     def __init__(self, model, prompt_function):
         self.model = model
@@ -15,9 +16,6 @@ class grokexperiment:
             ]
         )
         result = completion.choices[0].message.content
-        pick_match = re.search(r"(?i)pick\s*:\s*(.*)", result)
-        place_match = re.search(r"(?i)place\s*:\s*(.*)", result)
-        pick_str = pick_match.group(1).strip()
-        place_str = place_match.group(1).strip()
-        output = {"pick": pick_str, "place": place_str}
-        return result, output
+        print(f"Response: {result}")
+        action_match = re.search(r"(move.{0,7})", result)
+        return result, action_match
