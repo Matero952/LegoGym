@@ -8,7 +8,7 @@ def solve_problem(engine_name, domain_file, problem_file):
     print(problem)
     with OneshotPlanner(name=engine_name) as planner:
         result = planner.solve(problem)
-        print(result.status)
+        # print(result.status)
         if result.status == up.engines.PlanGenerationResultStatus.SOLVED_SATISFICING:
             print("Pyperplan returned: %s" % result.plan)
         else:

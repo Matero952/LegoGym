@@ -9,7 +9,6 @@ class ClaudeExperiment:
         self.model_name = model
 
     def process_sample(self, start, end):
-        return 0
         prompt = self.prompt_func(start, end)
         response = self.client.messages.create(
             max_tokens=1000,
