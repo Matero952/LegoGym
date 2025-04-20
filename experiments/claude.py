@@ -9,6 +9,7 @@ class ClaudeExperiment:
         self.model_name = model
 
     def process_sample(self, start, end):
+        return 0
         prompt = self.prompt_func(start, end)
         response = self.client.messages.create(
             max_tokens=1000,
@@ -20,4 +21,4 @@ class ClaudeExperiment:
         result = response.content[0].text
         print(f"Response: {result}")
         action_match = re.search(r"(move.{0,7})", result)
-        return result, action_match
+        return action_match

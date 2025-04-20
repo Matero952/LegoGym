@@ -1,13 +1,20 @@
 def generate_prompt(start_state, end_state):
     prompt = f'''
-This is a block stacking experiment where you recieve 2 states, a starting configuring and an end goal configuration.
-In each 2d array, a 1 represents a block and a 0 represents a clear cell. A block is described by its row index column index.
-You can only move a block(a cell filled with a 1) if there is a 0 above it. You cannot place things above the height limit, 
-and the maximum shape of the state is 5 rows by 5 columns. You can only move one block at a time, and after that move, the block's
-old position becomes clear and the blocks new position becomes filled. 
-Write your answer like this: 'move rx cy rx1 cy1' where rx is the blocks old row index, cy is the blocks old column index, rx1
-is the blocks new row index, and cy1 is the blocks new col index. If there is no move necessary to reach the goal state, please write ' '.
-Given this start state:
+This is a block-stacking task. You’re given two 2D arrays: a start and a goal configuration. Each array is 5×5, where 1 is a block and 0 is an empty cell. A block is located at its (row, column) index.
+
+Rules:
+
+You can only move a block (a 1) if there's a 0 directly above it.
+
+You can’t stack above the height limit (5 rows).
+
+Only one block can be moved at a time.
+
+After moving, the old position becomes 0 and the new one becomes 1.
+
+Format your answer like this:
+move r_old c_old r_new c_new
+If no move is needed, return: ' '.
 {start_state}
 What is the next best move to reach this end state:
 {end_state}

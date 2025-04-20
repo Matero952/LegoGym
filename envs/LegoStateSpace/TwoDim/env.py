@@ -40,7 +40,7 @@ class legoenv(object):
         self.state[end_r][end_c] = 1
         self.move_count += 1
         best_move_count_left = self.episode['min_moves'] - self.move_count
-        reward = get_reward(self.state, self.episode['end']['state'], 0.1, self.move_count, 
+        reward = get_reward(self.state, self.episode['end']['state'], 0.1, 
                             best_move_count_left)
         new_available_actions = get_available_actions(self.state)
         if self.move_count >= self.trunc_limit:
