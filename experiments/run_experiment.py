@@ -3,6 +3,7 @@ from grok import *
 from prompts import *
 from quotas import *
 import pandas as pd
+import time
 from pathlib import Path
 import sys
 pddls_directory = Path.cwd() / 'pddls'
@@ -34,10 +35,20 @@ def run_experiment(experiment, suffix=""):
     config = generate_full_config()
     conf_dict = generate_full_config_dict(config)
     for seed in range(len(conf_dict)):
+        if seed in new_df["seed"].values:
+            to_check_row = new_df[new_df["seed"] == seed]
+            if to_check_row.iloc[0]["agent_path_length"] <= to_check_row.iloc[0]["best_path_length"]:
+                correct += 1
+                seen += 1
+            else:
+                correct += 0
+                seen += 1
+            continue
+        start_time = time.time()
         start, end = conf_dict[seed]
         generate_problem_file_with_state('pddls/LegoProblem2d.pddl', (start, end))
         best_solution = solve_problem("fast-downward", "pddls/domain.pddl", "pddls/LegoProblem2d.pddl")
-        best_plan_length = len(solution.plan._actions)
+        best_plan_length = len(best_solution.plan._actions)
         print(best_plan_length)
         breakpoint()
         print(start)
@@ -59,18 +70,22 @@ def run_experiment(experiment, suffix=""):
         elif agent_plan_length > best_plan_length:
             correct += 0
             seen += 1
-        print(f"Agent: {experiment.model_name}; accuracy: {correct/seen}; correct: {correct}; seen: {seen}")
+        end_time = time.time()
+        time_taken = end_time-start_time
+        print(f"Agent: {experiment.model_name}; accuracy: {correct/seen}; correct: {correct}; seen: {seen}; seed: {seed}; time taken: {time_taken}")
         result = {
                 "seed": seed,
                 "next_best_move": best_solution.plan._actions[0] if best_plan_length > 0 else ' ',
-                "predicted_next_best_move": action_match,
+                "predicted_next_best_move": action_statement,
                 "best_path_length": best_plan_length,
                 "agent_path_length": agent_plan_length
                 }
         new_df.loc[len(new_df)] = result
         if seed % 10 == 0:
             new_df.to_csv(newdf_path, index=False)
+        end_time = time.time()
     new_df.to_csv(newdf_path, index=False)
+    return experiment.model_name, correct/seen, correct, seen
         
 
         
