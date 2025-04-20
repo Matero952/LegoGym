@@ -1,8 +1,6 @@
-from envs.LegoStateSpace.TwoDim.parse_action import *
 import re as re
 import os
 import anthropic
-
 class ClaudeExperiment:
     def __init__(self, model, prompt_function):
         self.client = anthropic.Anthropic(api_key=os.getenv('CLAUDE'))
