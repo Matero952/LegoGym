@@ -51,9 +51,7 @@ def run_experiment(experiment, suffix=""):
         best_solution = solve_problem("fast-downward", "pddls/domain.pddl", "pddls/LegoProblem2d.pddl")
         best_plan_length = len(best_solution.plan._actions)
         action_match = experiment.process_sample(start, end)
-        print(action_match.group(0))
-        breakpoint
-        start_block, end_cell = parse_action(action_match.group(0))
+        start_block, end_cell = parse_action(action_match)
         if start_block is None or end_cell is None:
             print(f"AAAA")
             # result = {
@@ -83,7 +81,10 @@ def run_experiment(experiment, suffix=""):
             # agent_path_length = ((get_reward(start, end, 1, best_plan_length - 1)) / -1) + best_plan_length + 1
             generate_problem_file_with_state('pddls/LegoProblem2d.pddl', (start, end))
             agent_solution = solve_problem("fast-downward", "pddls/domain.pddl", "pddls/LegoProblem2d.pddl")
-            agent_plan_length = len(agent_solution.plan._actions) + 1
+            try:
+                agent_plan_length = len(agent_solution.plan._actions) + 1
+            except AttributeError:
+                agent_plan_length = 100000000
             if agent_plan_length <= best_plan_length:
                 correct += 1
                 seen += 1

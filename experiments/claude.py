@@ -19,5 +19,7 @@ class ClaudeExperiment:
         print(f"Response: {response}")
         result = response.content[0].text
         print(f"Response: {result}")
-        action_match = re.search(r"(move.{0,7})", result)
-        return action_match
+        action_matches = list(re.finditer(r'\bmove.{0,9}', result))
+        if action_matches:
+            action_match = (action_matches[-1]).group(0)
+            return action_match
