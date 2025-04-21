@@ -57,5 +57,5 @@ def generate_trajectory_plan(seed):
 
 
 if __name__ == "__main__":
-    generate_trajectory_plan(15000)
+    generate_trajectory_plan(1)
 

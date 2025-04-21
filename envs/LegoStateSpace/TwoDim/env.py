@@ -43,11 +43,23 @@ class legoenv(object):
         reward = get_reward(self.state, self.episode['end']['state'], 0.1, 
                             best_move_count_left)
         new_available_actions = get_available_actions(self.state)
+        new_new_available_actions = []
+        for action in new_available_actions:
+            a = action[0]
+            b = action[1]
+            s_r, s_c = a
+            e_r, e_c = b
+            action_statement = f"move(r{s_r}, c{s_c}, r{e_r}, c{e_c})"
+            for key, value in generate_action_mapping().items():
+                if value == action_statement:
+                    new_new_available_actions.append(key)
+                else:
+                    continue
         if self.move_count >= self.trunc_limit:
             self.truncated = True
         if np.array_equal(self.state, self.episode['end']['state']):
             self.terminated = True
-        return self.state, new_available_actions, reward, self.truncated, self.terminated
+        return self.state, new_new_available_actions, reward, self.truncated, self.terminated
 
 
     def reset(self, rng: Optional[int] = None):
@@ -61,6 +73,8 @@ class legoenv(object):
 if __name__ == "__main__":
     experiment = legoenv(10, 200)
     move0 = experiment.step(602)
+    print(move0)
+    breakpoint()
     move1 = experiment.step(493)
     move2 = experiment.step(453)
     move3 = experiment.step(88)
