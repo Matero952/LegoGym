@@ -16,3 +16,6 @@ seed,next_best_move,predicted_next_best_move,best_plan_length,agent_plan_length
 14,"move(r4, c4, r4, c0)", ,14,0
 15,"move(r4, c4, r2, c2)", ,12,0
 16,"move(r4, c4, r2, c2)", ,15,0
+17,"move(r4, c4, r2, c2)", ,16,0
+18,"move(r4, c4, r3, c2)", ,13,0
+19,"move(r4, c4, r3, c2)", ,12,0

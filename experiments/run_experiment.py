@@ -51,8 +51,11 @@ def run_experiment(experiment, suffix=""):
         best_solution = solve_problem("fast-downward", "pddls/domain.pddl", "pddls/LegoProblem2d.pddl")
         best_plan_length = len(best_solution.plan._actions)
         action_match = experiment.process_sample(start, end)
+        print(action_match.group(0))
+        breakpoint
         start_block, end_cell = parse_action(action_match.group(0))
         if start_block is None or end_cell is None:
+            print(f"AAAA")
             # result = {
             #     "seed": seed,
             #     "next_best_move": best_solution.plan._actions[0] if best_plan_length > 0 else ' ',
