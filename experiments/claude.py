@@ -23,3 +23,5 @@ class ClaudeExperiment:
         if action_matches:
             action_match = (action_matches[-1]).group(0)
             return result, action_match
+        else:
+            return result, ' '

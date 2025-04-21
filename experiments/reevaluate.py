@@ -13,7 +13,7 @@ from LegoStateSpace.TwoDim.parse_action import *
 from LegoStateSpace.TwoDim.action_constraints import *
 
 def reevaluate(agent, input_csv_file, tolerance, suffix = ""):
-    save_dir = os.path.join("./results/", agent + f"{suffix}/")
+    save_dir = os.path.join("./results/", "3x3" + agent + f"{suffix}/")
     os.makedirs(save_dir, exist_ok=True)
     new_df_path = os.path.join(save_dir, f"{agent}" + "_reeval")
     new_df = pd.DataFrame(columns=['seed', 'best_plan_length', 'agent_plan_length', 'actual_plan_length_difference', 'tolerance', 'acceptable'])
@@ -84,7 +84,7 @@ def step_agent_move(start_state, move):
     updated_state[s_r][s_c] = 0
     updated_state[e_r][e_c] = 1
     return updated_state
-reevaluate('claude-3-7-sonnet-20250219', 'results\claude-3-7-sonnet-20250219\claude-3-7-sonnet-20250219_results.csv', 3)
+reevaluate('claude-3-7-sonnet-20250219', 'results/3x3/claude-3-7-sonnet-20250219/claude-3-7-sonnet-20250219_results.csv', 3)
 
 
 

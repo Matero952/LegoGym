@@ -13,6 +13,6 @@ class ActionSpace(object):
         return actions
 
 
-action_space = ActionSpace((5, 5))
-print(action_space.get_all_actions())
-print(6 % 3)
+# action_space = ActionSpace((5, 5))
+# print(action_space.get_all_actions())
+# print(6 % 3)

@@ -1,0 +1,99 @@
+seed,best_plan_length,agent_plan_length,actual_plan_length_difference,tolerance,acceptable
+0,0,0,0,3,True
+1,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+2,1,2,1,3,True
+3,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+4,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+5,6,8,2,3,True
+6,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+7,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+8,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+9,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+10,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+11,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+12,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+13,0,0,0,3,True
+14,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+15,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+16,1,2,1,3,True
+17,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+18,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+19,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+20,8,8,0,3,True
+21,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+22,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+23,6,4,-2,3,True
+24,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+25,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+26,0,0,0,3,True
+27,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+28,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+29,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+30,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+31,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+32,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+33,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+34,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+35,9,0,9,3,False
+36,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+37,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+38,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+39,0,0,0,3,True
+40,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+41,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+42,2,1,-1,3,True
+43,2,1,-1,3,True
+44,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+45,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+46,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+47,3,0,3,3,False
+48,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+49,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+50,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+51,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+52,0,0,0,3,True
+53,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+54,3,0,3,3,False
+55,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+56,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+57,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+58,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+59,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+60,2,3,1,3,True
+61,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+62,1,2,1,3,True
+63,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+64,6,8,2,3,True
+65,0,0,0,3,True
+66,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+67,4,0,4,3,False
+68,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+69,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+70,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+71,9,10,1,3,True
+72,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+73,2,0,2,3,False
+74,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+75,1,1,0,3,True
+76,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+77,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+78,0,0,0,3,True
+79,2,1,-1,3,True
+80,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+81,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+82,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+83,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+84,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+85,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+86,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+87,1,1,0,3,True
+88,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+89,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+90,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+91,0,0,0,3,True
+92,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+93,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+94,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+95,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+96,3,0,3,3,False
+97,2,3,1,3,True

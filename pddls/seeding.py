@@ -13,10 +13,10 @@ def generate(total_blocks, cols, max_rows):
     return valid_configs
 
 def generate_full_config():
-    configs = generate(5, 5, 5)
+    configs = generate(5, 3, 3)
     full_configs = []
     for cfg in configs:
-        arr = np.zeros((5, 5))
+        arr = np.zeros((3, 3))
         for pos in cfg:
             pos_row, pos_col = pos
             arr[pos_row][pos_col] = 1
