@@ -22,4 +22,4 @@ class ClaudeExperiment:
         action_matches = list(re.finditer(r'\bmove.{0,9}', result))
         if action_matches:
             action_match = (action_matches[-1]).group(0)
-            return action_match
+            return result, action_match

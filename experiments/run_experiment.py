@@ -2,6 +2,7 @@ from claude import *
 from grok import *
 from prompts import *
 from quotas import *
+import numpy as np
 import pandas as pd
 import time
 from pathlib import Path
@@ -28,21 +29,27 @@ def run_experiment(experiment, suffix=""):
         new_df = pd.read_csv(newdf_path)
     else:
         new_df = pd.DataFrame(
-            columns=["seed", "next_best_move", "predicted_next_best_move", "best_plan_length", "agent_plan_length"])
+            columns=["seed", "next_best_move", "predicted_next_best_move"])
         print(f"Created new dataframe")
     correct = 0
     seen = 0
     config = generate_full_config()
     conf_dict = generate_full_config_dict(config)
-    for seed in range(100):
+    for seed in range(15000, 15050):
         if seed in new_df["seed"].values:
             to_check_row = new_df[new_df["seed"] == seed]
-            if to_check_row.iloc[0]["agent_plan_length"] <= to_check_row.iloc[0]["best_plan_length"]:
+            if to_check_row.iloc[0]["next_best_move"] == to_check_row.iloc[0]["predicted_next_best_move"]:
                 correct += 1
                 seen += 1
-            elif to_check_row.iloc[0]["agent_plan_length"] > to_check_row.iloc[0]["best_plan_length"]:
+            else:
                 correct += 0
                 seen += 1
+            # if to_check_row.iloc[0]["agent_plan_length"] <= to_check_row.iloc[0]["best_plan_length"]:
+            #     correct += 1
+            #     seen += 1
+            # elif to_check_row.iloc[0]["agent_plan_length"] > to_check_row.iloc[0]["best_plan_length"]:
+            #     correct += 0
+            #     seen += 1
             print(f'SKIPPING')
             continue
         start_time = time.time()
@@ -50,7 +57,10 @@ def run_experiment(experiment, suffix=""):
         generate_problem_file_with_state('pddls/LegoProblem2d.pddl', (start, end))
         best_solution = solve_problem("fast-downward", "pddls/domain.pddl", "pddls/LegoProblem2d.pddl")
         best_plan_length = len(best_solution.plan._actions)
-        action_match = experiment.process_sample(start, end)
+        start = np.flipud(start)
+        end = np.flipud(end)
+        print(start, end)
+        result, action_match = experiment.process_sample(start, end)
         start_block, end_cell = parse_action(action_match)
         if start_block is None or end_cell is None:
             print(f"AAAA")
@@ -67,28 +77,33 @@ def run_experiment(experiment, suffix=""):
             else:
                 correct += 0
                 seen += 1
-            new_df = pd.concat([new_df, pd.DataFrame([[seed, best_solution.plan._actions[0] if best_plan_length > 0 else ' ',
-                    ' ', best_plan_length, 0
-                    ]], columns=['seed', 'next_best_move', 'predicted_next_best_move', 'best_plan_length', 'agent_plan_length'])], 
+            new_df = pd.concat([new_df, pd.DataFrame([[seed, best_solution.plan._actions[0] if len(best_solution.plan._actions) > 0 else ' ',
+                    ' ', result]], columns=['seed', 'next_best_move', 'predicted_next_best_move', 'response'])], 
                     ignore_index=True)
             new_df.to_csv(newdf_path, index=False)
         else:
             s_r, s_c = start_block
             e_r, e_c = end_cell
             action_statement = f"move(r{s_r}, c{s_c}, r{e_r}, c{e_c})"
-            start[s_r][s_c] = 0
-            end[e_r][e_c] = 1
-            # agent_path_length = ((get_reward(start, end, 1, best_plan_length - 1)) / -1) + best_plan_length + 1
-            generate_problem_file_with_state('pddls/LegoProblem2d.pddl', (start, end))
-            agent_solution = solve_problem("fast-downward", "pddls/domain.pddl", "pddls/LegoProblem2d.pddl")
-            try:
-                agent_plan_length = len(agent_solution.plan._actions) + 1
-            except AttributeError:
-                agent_plan_length = 100000000
-            if agent_plan_length <= best_plan_length:
+            # start[s_r][s_c] = 0
+            # end[e_r][e_c] = 1
+            # # agent_path_length = ((get_reward(start, end, 1, best_plan_length - 1)) / -1) + best_plan_length + 1
+            # generate_problem_file_with_state('pddls/LegoProblem2d.pddl', (start, end))
+            # agent_solution = solve_problem("fast-downward", "pddls/domain.pddl", "pddls/LegoProblem2d.pddl")
+            # try:
+            #     agent_plan_length = len(agent_solution.plan._actions) + 1
+            # except AttributeError:
+            #     agent_plan_length = 100000000
+            # if agent_plan_length <= best_plan_length:
+            #     correct += 1
+            #     seen += 1
+            # elif agent_plan_length > best_plan_length:
+            #     correct += 0
+            #     seen += 1
+            if action_statement == best_solution.plan._actions[0]:
                 correct += 1
                 seen += 1
-            elif agent_plan_length > best_plan_length:
+            else:
                 correct += 0
                 seen += 1
             end_time = time.time()
@@ -102,9 +117,9 @@ def run_experiment(experiment, suffix=""):
             #         "agent_plan_length": agent_plan_length
             #         }
             new_df = pd.concat([new_df, pd.DataFrame(
-                [[seed, best_solution.plan._actions[0] if best_plan_length > 0 else ' ', 
-                  action_statement, best_plan_length, agent_plan_length]],
-                columns=['seed', 'next_best_move', 'predicted_next_best_move', 'best_plan_length', 'agent_plan_length'])],
+                [[seed, best_solution.plan._actions[0] if len(best_solution.plan._actions) > 0 else ' ', 
+                  action_statement, result]],
+                columns=['seed', 'next_best_move', 'predicted_next_best_move', 'response'])],
                                ignore_index=True)
             # new_df.loc[len(new_df)] = result
             new_df.to_csv(newdf_path, index=False)

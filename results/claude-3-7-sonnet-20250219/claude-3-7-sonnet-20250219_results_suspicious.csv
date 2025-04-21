@@ -1,0 +1,27 @@
+seed,next_best_move,predicted_next_best_move
+0, , 
+1,"move(r4, c4, r0, c3)","move(r0, c4, r0, c3)"
+2,"move(r4, c4, r4, c0)","move(r0, c4, r0, c3)"
+3,"move(r4, c4, r4, c0)","move(r2, c4, r0, c3)"
+4,"move(r4, c4, r3, c3)","move(r0, c4, r0, c3)"
+5,"move(r4, c4, r4, c3)", 
+6,"move(r4, c4, r0, c2)","move(r4, c4, r0, c2)"
+7,"move(r4, c4, r0, c2)","move(r0, c4, r0, c2)"
+8,"move(r4, c4, r4, c0)", 
+9,"move(r4, c4, r4, c0)","move(r0, c4, r0, c2)"
+10,"move(r4, c4, r0, c2)","move(r0, c4, r0, c2)"
+11,"move(r4, c4, r4, c0)","move(r0, c4, r0, c2)"
+12,"move(r4, c4, r4, c0)","move(r0, c4, r0, c2)"
+13,"move(r4, c4, r4, c0)","move(r0, c4, r0, c2)"
+14,"move(r4, c4, r4, c0)","move(r0, c4, r0, c2)"
+15,"move(r4, c4, r2, c2)", 
+16,"move(r4, c4, r2, c2)","move(r0, c4, r0, c2)"
+17,"move(r4, c4, r2, c2)","move(r0, c4, r0, c2)"
+18,"move(r4, c4, r3, c2)","move(r0, c4, r0, c2)"
+19,"move(r4, c4, r3, c2)","move(r0, c4, r0, c2)"
+20,"move(r4, c4, r4, c2)", 
+21,"move(r4, c4, r0, c1)","move(r0, c4, r0, c1)"
+22,"move(r4, c4, r0, c1)","move(r0, c4, r0, c1)"
+23,"move(r4, c4, r4, c0)","move(r0, c4, r0, c1)"
+24,"move(r4, c4, r4, c0)","move(r0, c4, r0, c1)"
+25,"move(r4, c4, r0, c1)", 
