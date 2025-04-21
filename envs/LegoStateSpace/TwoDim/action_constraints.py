@@ -1,10 +1,9 @@
 import numpy as np
-from action_space import *
 from pathlib import Path
 import sys
-pddls_directory = Path.cwd() / 'pddls'
-sys.path.append(str(pddls_directory))
-from seeding import *
+envs_directory = Path.cwd() / 'envs'
+sys.path.append(str(envs_directory))
+from LegoStateSpace.TwoDim.action_space import *
 
 def get_moveable_spots(state_space, row_length, col_length):
     moveable_spots = []

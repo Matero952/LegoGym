@@ -1,0 +1,50 @@
+seed,best_plan_length,agent_plan_length,actual_plan_length_difference,tolerance,acceptable
+15000,7,0,7,3,False
+15001,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+15002,6,0,6,3,False
+15003,7,0,7,3,False
+15004,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+15005,7,9,2,3,True
+15006,6,6,0,3,True
+15007,5,7,2,3,True
+15008,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+15009,7,7,0,3,True
+15010,6,7,1,3,True
+15011,6,0,6,3,False
+15012,8,7,-1,3,True
+15013,7,0,7,3,False
+15014,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+15015,7,0,7,3,False
+15016,7,6,-1,3,True
+15017,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+15018,6,0,6,3,False
+15019,9,11,2,3,True
+15020,5,7,2,3,True
+15021,6,0,6,3,False
+15022,5,0,5,3,False
+15023,6,5,-1,3,True
+15024,5,7,2,3,True
+15025,4,5,1,3,True
+15026,9,0,9,3,False
+15027,5,0,5,3,False
+15028,6,6,0,3,True
+15029,9,7,-2,3,True
+15030,6,0,6,3,False
+15031,5,6,1,3,True
+15032,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+15033,5,6,1,3,True
+15034,4,6,2,3,True
+15035,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+15036,5,6,1,3,True
+15037,4,5,1,3,True
+15038,5,8,3,3,True
+15039,8,0,8,3,False
+15040,5,6,1,3,True
+15041,4,10,6,3,False
+15042,5,6,1,3,True
+15043,5,6,1,3,True
+15044,6,7,1,3,True
+15045,9,9,0,3,True
+15046,Invalid Move,Invalid Move,Invalid Move,3,Invalid Move
+15047,6,6,0,3,True
+15048,7,5,-2,3,True
