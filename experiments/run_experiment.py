@@ -22,7 +22,7 @@ def run_experiment(experiment, suffix=""):
         print(f"{experiment.model_name} isnt in our quotas list")
         return 0
     os.makedirs("./results/", exist_ok=True)
-    save_dir = os.path.join("./results/3x3", experiment.model_name + f"{suffix}/")
+    save_dir = os.path.join("./results/5x5", experiment.model_name + f"{suffix}/")
     os.makedirs(save_dir, exist_ok=True)
     newdf_path = os.path.join(save_dir, f'{experiment.model_name}{suffix}_results.csv')
     if os.path.exists(newdf_path):
@@ -35,7 +35,7 @@ def run_experiment(experiment, suffix=""):
     seen = 0
     config = generate_full_config()
     conf_dict = generate_full_config_dict(config)
-    for seed in range(0, 100):
+    for seed in range(15000, 15050):
         if seed in new_df["seed"].values:
             to_check_row = new_df[new_df["seed"] == seed]
             if to_check_row.iloc[0]["next_best_move"] == to_check_row.iloc[0]["predicted_next_best_move"]:
@@ -130,5 +130,5 @@ def run_experiment(experiment, suffix=""):
 
         
 
-
-run_experiment(ClaudeExperiment("claude-3-7-sonnet-20250219", generate_prompt))
+run_experiment(grokexperiment("grok-3-mini-beta", generate_prompt))
+# run_experiment(ClaudeExperiment("claude-3-7-sonnet-20250219", generate_prompt))

@@ -28,7 +28,7 @@ def get_moveable_spots(state_space, row_length, col_length):
 def get_available_actions(state_space):
     row_length, col_length = np.shape(state_space)
     moveable_spots, moveable_blocks = get_moveable_spots(state_space, row_length, col_length)
-    action_space = ActionSpace((3, 3))
+    action_space = ActionSpace((5, 5))
     valid_actions = []
     all_actions = action_space.get_all_actions()
     for action in all_actions:
