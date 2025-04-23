@@ -30,7 +30,7 @@
     )
     (:action season_egg
         :parameters (
-            ?egg
+            ?egg - egg
         )
         :precondition (and 
             (cracked ?egg)
@@ -53,11 +53,17 @@
             (clean_station ?station)
         )
         :effect (and 
-            (assign (cook_time ?cook_time) ?cook_time)
-            (when (<= (cook_time) 5)
+            (assign (cook_time) ?cook_time)
+            (when (= (cook_time) 5)
                 (over_easy ?egg)
             )
-            (when ())
+            (when (= (cook_time) 10)
+                (over_medium ?egg)
+            )
+            (when (= (cook_time) 10)
+                (over_hard ?egg)
+            )
+            (not (clean_station ?station))
         )
     )
 )

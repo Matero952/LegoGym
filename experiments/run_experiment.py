@@ -1,5 +1,6 @@
 from claude import *
 from grok import *
+from open_router import *
 from prompts import *
 from quotas import *
 import numpy as np
@@ -22,9 +23,10 @@ def run_experiment(experiment, suffix=""):
         print(f"{experiment.model_name} isnt in our quotas list")
         return 0
     os.makedirs("./results/", exist_ok=True)
-    save_dir = os.path.join("./results/5x5", experiment.model_name + f"{suffix}/")
+    safe_model_name = experiment.model_name.replace("/", "_").replace(":", "_")
+    save_dir = os.path.join("./results/5x5", safe_model_name + f"{suffix}/")
     os.makedirs(save_dir, exist_ok=True)
-    newdf_path = os.path.join(save_dir, f'{experiment.model_name}{suffix}_results.csv')
+    newdf_path = os.path.join(save_dir, f'{safe_model_name}{suffix}_results.csv')
     if os.path.exists(newdf_path):
         new_df = pd.read_csv(newdf_path)
     else:
@@ -130,5 +132,5 @@ def run_experiment(experiment, suffix=""):
 
         
 
-run_experiment(grokexperiment("grok-3-mini-beta", generate_prompt))
+run_experiment(or_experiment("deepseek/deepseek-r1:free", generate_prompt))
 # run_experiment(ClaudeExperiment("claude-3-7-sonnet-20250219", generate_prompt))

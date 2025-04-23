@@ -12,4 +12,7 @@ quotas = {"gemini-2.0-flash-exp": 5.01,
           "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B" : 0, 
           "claude-3-7-sonnet-20250219" : 0, 
           "deepseek-ai/DeepSeek-R1-Distill-Llama-8B" : 0,
-          "grok-3-mini-beta" : 0}
+          "grok-3-mini-beta" : 0,
+          "gemini-2.0-flash" : 4.01,
+          "deepseek/deepseek-r1:free" : 2.01
+          }
